@@ -4,7 +4,7 @@ function loguear() {
     let contraseña = document.getElementById("password").value
     if ((correo !== "") && (contraseña !== "")){
     window.location.replace="portada.html"
-        console.log(window.location.replace="portada.html")
+        console.log(window.location.login="portada.html")
 } else{
     alert("Ingrese un correo electronico y una contraseña")
 }

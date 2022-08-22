@@ -1,22 +1,13 @@
-function logueoExitoso() {
-    window.location.href = "https://smanuel13.github.io/JaP2022/portada.html";
-}
 
-function logueoError() {
-    alert(Ingrese un correo electronico y una contraseña)
-
-    ;
-}
-
-function validar() {
-    let correo = document.getElementById("floatingInput").value
-    let contraseña = document.getElementById("floatingPassword").value
-
+function loguear() {
+    let correo = document.getElementById("email").value
+    let contraseña = document.getElementById("password").value
     if ((correo !== "") && (contraseña !== "")){
-    return logueoExitoso();
-} else {
-    return logueoError();
+    window.location.replace="portada.html"
+        console.log(window.location.replace="portada.html")
+} else{
+    alert("Ingrese un correo electronico y una contraseña")
 }
 }
-
-document.getElementById("boton").addEventListener("click", validar)
+console.log(loguear)
+document.getElementById("boton").addEventListener("click", loguear);

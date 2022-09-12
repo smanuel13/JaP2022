@@ -1,10 +1,44 @@
 let productsArray = [];
 
+/*let categoriesName = [];
+
+function showCategoriesName(arrayn) {
+    let htmlContentToAppend = "";
+    let arraynamevar = arrayn.name
+    console.log(arraynamevar)
+   for (let i = 0; i < arraynamevar.length; i++) {
+        let productoCat = arraynamevar[i];
+        console.log(productoCat)
+        htmlContentToAppend += `
+            <h1>Productos</h1>
+                <p>Aquí verás todos los productos de la categoría ` + productoCat.catName + ` </p>
+            <br>
+        
+        `
+        document.getElementById("title-container").innerHTML = htmlContentToAppend;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function (a) {
+    getJSONData(CATEGORIES_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            categoriesName = resultObj.data;
+            showCategoriesName(categoriesName);
+            
+        }
+    });
+});
+*/
+
+/*function categoriesTitle() {
+    let cat = 
+
+} */
 function showProductsList(array) {
     let htmlContentToAppend = "";
     let array1= array.products
    for (let i = 0; i < array1.length; i++) {
-        let producto = array1[i];
+          let producto = array1[i];
         //console.log(producto)
         htmlContentToAppend += `
         <div class="container list-group-item list-group-item-action"> 

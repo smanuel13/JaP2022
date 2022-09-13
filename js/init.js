@@ -41,13 +41,13 @@ let getJSONData = function(url){
 }
 
 
-document.addEventListener("DOMContentLoaded", () =>{
+/*document.addEventListener("DOMContentLoaded", () =>{
   console.log('Esto funciona');
-   /*Captura de datos escrito en los inputs*/        
+   /*Captura de datos escrito en los inputs      
    let loginName = document.getElementById("email");
   console.log(loginName)
-   /*Guardando los datos en el LocalStorage*/
+   Guardando los datos en el LocalStorage
    localStorage.setItem("Nombre", loginName);
 
-})   
+})  */
      

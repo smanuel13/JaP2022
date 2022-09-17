@@ -1,39 +1,76 @@
 let productsArray = [];
+let catNamesArray = ['101.json','102.json','103.json','104.json','105.json','106.json','107.json','108.json','109.json'];
+let category = localStorage.getItem('catID'); 
 
-/*let categoriesName = [];
-
-function showCategoriesName(arrayn) {
+function showCatName(array1) {
     let htmlContentToAppend = "";
-    let arraynamevar = arrayn.name
-    console.log(arraynamevar)
-   for (let i = 0; i < arraynamevar.length; i++) {
-        let productoCat = arraynamevar[i];
-        console.log(productoCat)
+    
+  console.log(category)
+    //let arrayCat= array1.id
+    //console.log(arrayCat)
+   if (category == 101 )
+   //for (let i = 0; i < array1.length; i++) {
+          //let category = array1[i];
+            //console.log(category)
         htmlContentToAppend += `
-            <h1>Productos</h1>
-                <p>Aquí verás todos los productos de la categoría ` + productoCat.catName + ` </p>
-            <br>
-        
+        <h1>Productos</h1>
+        <p>Aquí verás todos los productos de la categoría Autos </p>
         `
-        document.getElementById("title-container").innerHTML = htmlContentToAppend;
-    }
-}
+        if (category == 102 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Juguetes </p>
+      `
+    if (category == 103 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Muebles </p>
+      `
+    if (category == 104 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Herramientas </p>
+      `
+      if (category == 105 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Computadoras </p>
+      `
+      if (category == 106 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Vestimenta </p>
+      `
+      if (category == 107 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Electrodomésticos </p>
+      `
+      if (category == 108 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Deporte </p>
+      `
+      if (category == 109 )
+      htmlContentToAppend += `
+      <h1>Productos</h1>
+      <p>Aquí verás todos los productos de la categoría Celulares </p>
+      `
+        document.getElementById("products-title-container").innerHTML = htmlContentToAppend;
+   }
+//}
 
 document.addEventListener("DOMContentLoaded", function (a) {
     getJSONData(CATEGORIES_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
-            categoriesName = resultObj.data;
-            showCategoriesName(categoriesName);
+            catNamesArray = resultObj.data;
+            showCatName(catNamesArray);
             
         }
     });
 });
-*/
 
-/*function categoriesTitle() {
-    let cat = 
 
-} */
 function showProductsList(array) {
     let htmlContentToAppend = "";
     let array1= array.products
@@ -64,8 +101,11 @@ function showProductsList(array) {
     }
 }
 
+let categoryJSON = `https://japceibal.github.io/emercado-api/cats_products/` + category + `.json`;
+console.log(categoryJSON)
+
 document.addEventListener("DOMContentLoaded", function (a) {
-    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+    getJSONData(categoryJSON).then(function (resultObj) {
         if (resultObj.status === "ok") {
             productsArray = resultObj.data;
             showProductsList(productsArray);

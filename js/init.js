@@ -1,6 +1,6 @@
-const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
+let CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
 const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+//const PRODUCTS_URL= "https://japceibal.github.io/emercado-api/cats_products/";
 const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
 const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
@@ -41,13 +41,3 @@ let getJSONData = function(url){
 }
 
 
-/*document.addEventListener("DOMContentLoaded", () =>{
-  console.log('Esto funciona');
-   /*Captura de datos escrito en los inputs      
-   let loginName = document.getElementById("email");
-  console.log(loginName)
-   Guardando los datos en el LocalStorage
-   localStorage.setItem("Nombre", loginName);
-
-})  */
-     

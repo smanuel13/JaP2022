@@ -15,7 +15,7 @@ console.log(botonRegistrar)
  )
   
 /*defino la funcion loguear que tiene un condicional if para que si el campo correo y contraseña es distinto de vacío me redireccione a la portada.html*/ 
-function loguear() {
+function loguear() { //le estaba pasando (correo) como parametro a la funcion entonces daba error y en el local storage me lo guardaba como un objecto pointerEvent
     console.log(correo);
     console.log(contraseña);
     console.log("entro")

@@ -40,4 +40,17 @@ let getJSONData = function(url){
     });
 }
 
+/*Creo un event de escucha para que primero cargue el dom, luego ejecuto mi funcion que lo que hace es:
+Defino una variable loginName para traer el elemento mail1 guardado en el local storage (ver login.js linea 27) luego defino una
+variable para agregar ese dato a la barra de navegacion de la pagina y por ultimo lo agrego al dom con un id (logUser)que le puse al
+contenedor <li> de la barra */
+document.addEventListener("DOMContentLoaded", function(){
+  let loginName = localStorage.getItem("mail1")
+  let htmlContentToAppend = `
+     <a class="nav-link">` + loginName + `</a>
+     `
+  console.log(loginName)
+  document.getElementById("logUser").innerHTML = htmlContentToAppend
+  
 
+})

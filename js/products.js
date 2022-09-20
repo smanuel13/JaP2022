@@ -1,6 +1,12 @@
 let productsArray = [];
 let catNamesArray = ['101.json','102.json','103.json','104.json','105.json','106.json','107.json','108.json','109.json'];
 let category = localStorage.getItem('catID'); 
+//Para el sort por precio
+
+let min = undefined;
+let max = undefined;
+let listado = [];
+
 
 function showCatName(array1) {
     let htmlContentToAppend = "";
@@ -76,6 +82,7 @@ function showProductsList(array) {
     let array1= array.products
    for (let i = 0; i < array1.length; i++) {
           let producto = array1[i];
+          if ((producto.cost >=min || min == undefined) && (producto.cost <= max || max == undefined)){
         //console.log(producto)
         htmlContentToAppend += `
         <div class="container list-group-item list-group-item-action"> 
@@ -99,8 +106,11 @@ function showProductsList(array) {
         `
         document.getElementById("products-list-container").innerHTML = htmlContentToAppend;
     }
+   }
 }
 
+/*Creo una variable category que trae el elemento guardado en el localstorage y a partir de ahi creo la url con el valor 
+de cada categoría */
 let categoryJSON = `https://japceibal.github.io/emercado-api/cats_products/` + category + `.json`;
 console.log(categoryJSON)
 
@@ -112,4 +122,35 @@ document.addEventListener("DOMContentLoaded", function (a) {
             
         }
     });
-});
+
+    document.getElementById("rangeFilterCount").addEventListener("click", function(){
+
+        if (document.getElementById("rangeFilterCountMin").value !=""){
+            min= parseInt(document.getElementById("rangeFilterCountMin").value);
+        }
+        else{
+            min = undefined;
+        }
+
+        if (document.getElementById("rangeFilterCountMax").value !=""){
+            max= parseInt(document.getElementById("rangeFilterCountMax").value);
+        }
+        else{
+            max = undefined;
+        }
+
+        showProductsList(productsArray);
+
+    });
+
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        document.getElementById("rangeFilterCountMin").value = "";
+        document.getElementById("rangeFilterCountMax").value = "";
+
+        min = undefined;
+        max = undefined;
+
+        showProductsList(productsArray);
+    });
+
+})

@@ -2,11 +2,18 @@ let productsArray = [];
 let catNamesArray = ['101.json','102.json','103.json','104.json','105.json','106.json','107.json','108.json','109.json'];
 let category = localStorage.getItem('catID'); 
 //Para el sort por precio
-
 let min = undefined;
 let max = undefined;
 let listado = [];
 
+
+document.getElementById("sortAsc").addEventListener("click",function(){
+    listado.sort(function(a , b){
+        return parseInt(a.cost) - parseInt(b.cost);
+
+    })
+    showProductsList(productsArray);
+})
 
 function showCatName(array1) {
     let htmlContentToAppend = "";
@@ -75,7 +82,11 @@ document.addEventListener("DOMContentLoaded", function (a) {
         }
     });
 });
-
+//entrega 3.1 setear el id del producto en el local storage
+function setProductoId (id){
+    localStorage.setItem("productoID" , id)
+    window.location = "product-info.html"
+} 
 
 function showProductsList(array) {
     let htmlContentToAppend = "";
@@ -85,7 +96,7 @@ function showProductsList(array) {
           if ((producto.cost >=min || min == undefined) && (producto.cost <= max || max == undefined)){
         //console.log(producto)
         htmlContentToAppend += `
-        <div class="container list-group-item list-group-item-action"> 
+        <div onclick=" setProductoId(${producto.id})" class="container list-group-item list-group-item-action"> 
             <div class="row">
                 <div class="col-3">
                     <img src="` + producto.image + `" alt="product image" class="img-thumbnail">

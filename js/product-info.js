@@ -48,12 +48,14 @@ document.addEventListener   ("DOMContentLoaded", function(){
             nombreProd = resultObj.data.name
             productInfo = resultObj.data;
             showProductInfo()
+            showRelatedProduct ()
         }
         getJSONData(PRODUCT_INFO_COMMENTS_URL + prodID + ".json").then(function(resultObj){
             if (resultObj.status === "ok"){
                 productInfoComent = resultObj.data;
                 console.log(productInfoComent)
                 showProductInfoComent()
+                
             }
         })
     })
@@ -129,9 +131,38 @@ document.addEventListener   ("DOMContentLoaded", function(){
      else{
         window.location.href = "product-info.html";
      }
-    })
+    });
+    
+   
 
+    function showRelatedProduct (){
+        let relacionados = productInfo.relatedProducts 
+        console.log(relacionados);
+        let relacionadosHtml = ""
+
+        for(i=0; i<relacionados.length ; i++){
+        let rela=relacionados[i];
+
+        relacionadosHtml += `
+
+        <div class="card">
+        <img onclick="setRelatedProductID(${rela.id})" src="${rela.image}" class="card-img-tos">
+        <div class="card-body">
+        <h5 class="card-title">${rela.name}</h5>
+        </div>
+            
+        `
+        }
+        document.getElementById("productosRelacionados").innerHTML += relacionadosHtml
+    }
 });
+
+    function setRelatedProductID(relId) {
+        localStorage.setItem("productoID" ,relId)
+        window.location = "product-info.html"
+        showProductInfo()
+    }
+
 
 
 

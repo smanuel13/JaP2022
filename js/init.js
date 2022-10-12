@@ -47,10 +47,25 @@ contenedor <li> de la barra */
 document.addEventListener("DOMContentLoaded", function(){
   let loginName = localStorage.getItem("mail1")
   let htmlContentToAppend = `
-     <a class="nav-link">` + loginName + `</a>
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    ${loginName}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+    <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
+    <li><a class="dropdown-item" href="cart.html">Carrito de Compras</a></li>
+    <li><a class="dropdown-item" id="sesion">Cerrar Sesión</a></li>
+  </ul>
+</div>
      `
   console.log(loginName)
   document.getElementById("logUser").innerHTML = htmlContentToAppend
-  
+  document.getElementById("sesion").addEventListener("click", function(){
+    let cerrarSesion = confirm("Está a punto de cerrar su sesión");
+    if (cerrarSesion){
+      window.location.href = "index.html"
+      localStorage.removeItem("mail1")
+    }
+  });
 
-})
+});

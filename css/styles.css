@@ -5,6 +5,11 @@
   font-family: 'Raleway', serif !important;
 }
 
+.carrito{
+
+  width: 100px;
+  height: 80px;
+}
 .jumbotron .display-4 {
   font-weight: bold;
 }

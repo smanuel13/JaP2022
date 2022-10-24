@@ -146,7 +146,7 @@ document.addEventListener   ("DOMContentLoaded", function(){
         relacionadosHtml += `
 
         <div class="card">
-        <img onclick="setRelatedProductID(${rela.id})" src="${rela.image}" class="card-img-tos">
+        <img onclick="setRelatedProductID(${rela.id})" src="${rela.image}" class="img-thumbnail">
         <div class="card-body">
         <h5 class="card-title">${rela.name}</h5>
         </div>
@@ -162,6 +162,8 @@ document.addEventListener   ("DOMContentLoaded", function(){
         window.location = "product-info.html"
         showProductInfo()
     }
+
+    
 
 
 

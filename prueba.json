@@ -8,6 +8,14 @@
             "unitCost": 15200,
             "currency": "USD",
             "image": "img/prod50924_1.jpg"
+        } ,
+         {
+            "id": 50925,
+            "name": "Peugeot 209",
+            "count": 1,
+            "unitCost": 14000,
+            "currency": "USD",
+            "image": "img/prod50924_1.jpg"
         }
     ]
 }

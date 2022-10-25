@@ -1,8 +1,7 @@
 let cartArray = [];
 
-let cartJSON = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
-
-
+let cartJSON = "https://raw.githubusercontent.com/smanuel13/JaP2022/main/prueba.json";
+let subtotal = 0;
 
 function showCartList(array){
     let array1 = array.articles;
@@ -25,19 +24,28 @@ function showCartList(array){
           <tr>
             <th scope="row"><img src=${articulo.image} class="img-thumbnail carrito"></th>
             <td>${articulo.name}</td>
-            <td>${articulo.currency}  ${articulo.unitCost}</td>
+            <td>${articulo.currency}  <p id="costoUnidad">${articulo.unitCost}</p></td>
             <td><input type="number" id="cantidadArticulos" min="1" max="500" value="${articulo.count}"></td>
-            <td id="subtotal">${articulo.currency}  ${articulo.unitCost*cantArticulo}</td>
+            <td><p id="subtotal">${subtotal}</p></td>
           </tr> 
         </tbody>
       </table>
         `
 
         document.getElementById("carrito").innerHTML = htmlCart;
-        let cantArticulo = document.getElementById("cantidadArticulos").value;
+        
         }
     }
 
+    function updateSubtotal(){
+      let cantArt = document.getElementById("cantidadArticulos").value;
+      console.log(cantArt)
+      let costArt = document.getElementById("costoUnidad").innerHTML;
+      console.log(costArt)
+      let subtotal1 = cantArt*costArt;
+      console.log(subtotal1);
+      document.getElementById("subtotal").innerHTML = subtotal1;
+    }
 
 document.addEventListener("DOMContentLoaded", function (a) {
     getJSONData(cartJSON).then(function (resultObj) {
@@ -47,12 +55,13 @@ document.addEventListener("DOMContentLoaded", function (a) {
             showCartList(cartArray);
             
         }
-        document.getElementById("cantidadArticulos").addEventListener("input", function(){
-
-            
-            document.getElementById("subtotal").innerHTML = `${}
-            `
-        })
-    
+        document.getElementById("cantidadArticulos").addEventListener("change", function(){
+          console.log()
+          subtotal = this.value;
+          updateSubtotal();
+      });
+  
+         
+  
         });
 });

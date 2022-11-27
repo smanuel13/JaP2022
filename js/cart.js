@@ -2,6 +2,36 @@ let cartArray = [];
 
 let cartJSON = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 let subtotal1 = 0;
+let comission = 0.15;
+//evento de escucha a la carga del dom que trae los datos al cargar la pagina y los pasa como parametros a la funcion
+
+document.addEventListener("DOMContentLoaded", function (a) {
+  getJSONData(cartJSON).then(function (resultObj) {
+      if (resultObj.status === "ok") {
+          console.log(resultObj);
+          cartArray = resultObj.data;
+          showCartList(cartArray);
+          updateSubtotal();
+          actualizarCostos()  
+        
+          
+      }
+      //Evento de escucha al objeto con id cantidadarticulos para que al cambiar actualice el valor de la cantidad y por lo tanto del subtotal
+      document.getElementById("cantidadArticulos").addEventListener("change", function(){
+        console.log()
+        subtotal1 = this.value;
+        updateSubtotal();
+        
+    });
+
+    document.addEventListener("change", ()=>{
+      disPaymentforma();
+    })
+
+       
+
+      });
+});
 
 //Funcion para mostrar los articulos del carro con la data obtenida del json de arriba
 function showCartList(array){
@@ -31,59 +61,39 @@ function showCartList(array){
           </tr> 
         </tbody>
       </table>
-      <hr class="mb-4">
-          <h5 class="mb-3">Tipo de Envío</h5>
-          <div class="d-block my-3">
-            <div class="custom-control custom-radio">
-              <input id="premiumradio" name="sendType" type="radio" class="custom-control-input" checked=""
-                required="">
-              <label class="custom-control-label" for="premiumradio">Premium 2 a 5 días (15%)</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input id="expressradio" name="sendType" type="radio" class="custom-control-input" required="">
-              <label class="custom-control-label" for="expressradio">Express 5 a 8 días (7%)</label>
-            </div>
-            <div class="custom-control custom-radio">
-              <input id="standardradio" name="sendType" type="radio" class="custom-control-input" required="">
-              <label class="custom-control-label" for="standardradio">Standard 12 a 15 días (5%)</label>
-            </div>
-            <hr>
-            <div>
-            <div  >
-              <h4 class="mb-3">Dirección de envío</h4>
-              <form class="needs-validation" id="send-info">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="streetName">Calle</label>
-                    <input type="text" class="form-control" id="streetName" value="" name="streetName">
-                    <div class="invalid-feedback">
-                      Ingresa una calle
-                    </div>
-                  </div>
-                  <br>
-                  <div class="col-md-6 mb-3">
-                    <label for="streetNumber">Numero</label>
-                    <input type="text" class="form-control" id="streetNumber" value="" name="streetNumber">
-                    <div class="invalid-feedback">
-                      Ingresa un numero de calle
-                    </div>
-                  </div>
-                  <br>
-                  <div class="col-md-6 mb-3">
-                    <label for="streetCorner">Esquina</label>
-                    <input type="text" class="form-control" id="streetCorner" value="" name="streetCorner">
-                    <div class="invalid-feedback">
-                      Ingresa una Esquina
-                    </div>
-                  </div>
-                </div>
-
-        `
-
+     `
+       
         document.getElementById("carrito").innerHTML = htmlCart;
         
         }
     }
+    //funcion para desactivar los campos del modal (NOMEFUNCIONAANOSEPORQUEPREGUNTARDANIEL)
+    // function disModal() {
+
+      // let cCard = document.getElementById("cCard");
+      // let bTransf = document.getElementById("bTransf");
+      // let cNumber = document.getElementById("cardNumber"); 
+      // let cCode = document.getElementById("cardCode"); 
+      // let cExp = document.getElementById("cardExp"); 
+      // let accountNumber = document.getElementById("cNumber");
+
+  // if (cCard.checked) {
+      // cNumber.disabled = false
+      // cCode.disabled = false
+      // cExp.disabled = false
+      // accountNumber.disabled = true
+  // } else if (bTransf.checked) {
+      // cNumber.disabled = true
+      // cCode.disabled = true
+      // cExp.disabled = true
+      // accountNumber.disabled = false
+  // }
+
+  // document.getElementById("contidionsModal").addEventListener("click", function(e){
+    // disModal();
+
+  // }
+  // )}
 
     //funcion para actualizar el subtotal, obteniene los elementos y hace la cuenta
     function updateSubtotal(){
@@ -94,26 +104,75 @@ function showCartList(array){
       let subtotal1 = cantArt*costArt;
       console.log(subtotal1);
       document.getElementById("subtotal").innerHTML = subtotal1;
+      document.getElementById("productSubCost").innerHTML = subtotal1;
+    }
+ console.log(subtotal1);
+  
+ //para calcular el costo de envío y actualizar el total
+  
+      function actualizarCostos(){
+        let precioUnitario = document.getElementById("productSubCost").innerHTML;
+        let costoEnvio = document.getElementById('sendCostPrice').innerHTML=Math.round(comission* parseFloat(precioUnitario));
+    
+        document.getElementById('totalCostText').innerHTML=(parseFloat(precioUnitario) + parseFloat(costoEnvio))
+        
     }
 
-    //evento de escucha a la carga del dom que trae los datos al cargar la pagina y los pasa como parametros a la funcion
 
-document.addEventListener("DOMContentLoaded", function (a) {
-    getJSONData(cartJSON).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            console.log(resultObj);
-            cartArray = resultObj.data;
-            showCartList(cartArray);
-            
-        }
-        //Evento de escucha al objeto con id cantidadarticulos para que al cambiar actualice el valor de la cantidad y por lo tanto del subtotal
-        document.getElementById("cantidadArticulos").addEventListener("change", function(){
-          console.log()
-          subtotal = this.value;
-          updateSubtotal();
+
+      document.getElementById("premium").addEventListener("change", function(){
+        comission = 0.15;
+        actualizarCostos();
       });
-  
-         
-  
-        });
-});
+    
+      document.getElementById("express").addEventListener("change", function(){
+        comission = 0.07;
+        actualizarCostos();
+      });
+    
+      document.getElementById("standard").addEventListener("change", function(){
+        comission = 0.05;
+        actualizarCostos();
+      });
+
+
+
+    //Variables del Modal y metodos de pago
+
+      let cardNumber = document.getElementById("cardNumber");
+      let cardExp = document.getElementById("cardExp");
+      let cardCode = document.getElementById("cardCode");
+      let cNumber = document.getElementById("cNumber");
+      let metodoDePago = document.getElementById("metodoDePago");
+
+        let metodo1 = document.getElementById("cCard");
+        console.log(metodo1)
+        let metodo2 = document.getElementById("bTransf")
+        console.log(metodo2)
+
+
+//Función para deshabilitar los campos del modal y mostrar el metodo de pago seleccionado
+      function disPaymentforma(){
+      
+          metodo1.addEventListener("click", function (e) {
+          cardNumber.disabled = false;
+          cardExp.disabled = false;
+          cardCode.disabled = false;
+          cNumber.disabled = true;
+          metodoDePago.innerText = "Tarjeta de credito";
+            })
+
+          metodo2.addEventListener("click", function (e) {
+          cardNumber.disabled = true;
+          cardExp.disabled = true;
+          cardCode.disabled = true;
+          cNumber.disabled = false;
+          metodoDePago.innerText = "Transferencia bancaria";
+
+          })
+          
+          document.getElementById("contidionsModal").addEventListener("click", function(e){
+             disPaymentforma();
+        
+           })}
+           

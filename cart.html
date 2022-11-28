@@ -53,18 +53,18 @@
             <div class="container">
             <hr class="mb-4">
             <h5 class="mb-3">Tipo de Envío</h5>
+            <form action="#" method="get" class="row mt-4 needs-validation" id="form" novalidate>
             <div class="d-block my-3">
               <div class="custom-control custom-radio">
-                <input id="premium" name="sendType" type="radio" class="custom-control-input" checked=""
-                  required="" onclick="sendCost()">
+                <input id="premium" name="sendType" type="radio" class="form-check-input" checked="" required="" onclick="actualizarCostos()">
                 <label class="custom-control-label" for="premiumradio">Premium 2 a 5 días (15%)</label>
               </div>
               <div class="custom-control custom-radio">
-                <input id="express" name="sendType" type="radio" class="custom-control-input" required="" onclick="${sendCost()}">
+                <input id="express" name="sendType" type="radio" class="form-check-input" required="" onclick="actualizarCostos()">
                 <label class="custom-control-label" for="expressradio">Express 5 a 8 días (7%)</label>
               </div>
               <div class="custom-control custom-radio">
-                <input id="standard" name="sendType" type="radio" class="custom-control-input" required="" onclick="${sendCost()}">
+                <input id="standard" name="sendType" type="radio" class="form-check-input" required="" onclick="actualizarCostos()">
                 <label class="custom-control-label" for="standardradio">Standard 12 a 15 días (5%)</label>
             <hr>
              <!--Modal fuera-->
@@ -75,34 +75,40 @@
           </div>
           <hr>
           <div>
-          <div  >
+          <div >
             <h4 class="mb-3">Dirección de envío</h4>
-            <form class="needs-validation" id="send-info">
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label for="streetName">Calle</label>
-                  <input type="text" class="form-control" id="streetName" value="" name="streetName">
+                  <label for="streetName" class="form-label">Calle</label>
+                  <div class="form-group input-group has-validation">
+                  <input type="text" class="form-control" id="streetName" value="" name="streetName" required>
                   <div class="invalid-feedback">
                     Ingresa una calle
                   </div>
                 </div>
+                </div>
                 <br>
                 <div class="col-md-6 mb-3">
-                  <label for="streetNumber">Numero</label>
-                  <input type="text" class="form-control" id="streetNumber" value="" name="streetNumber">
+                  <label for="streetNumber" class="form-label">Numero</label>
+                  <div class="form-group input-group has-validation">
+                  <input type="text" class="form-control" id="streetNumber" value="" name="streetNumber" required>
                   <div class="invalid-feedback">
                     Ingresa un numero de calle
                   </div>
                 </div>
+                </div>
                 <br>
                 <div class="col-md-6 mb-3">
-                  <label for="streetCorner">Esquina</label>
-                  <input type="text" class="form-control" id="streetCorner" value="" name="streetCorner">
+                  <label for="streetCorner" class="form-label">Esquina</label>
+                  <div class="form-group input-group has-validation">
+                  <input type="text" class="form-control" id="streetCorner" value="" name="streetCorner" required>
                   <div class="invalid-feedback">
                     Ingresa una Esquina
                   </div>
                 </div>
+                </div>
               </div>
+            </form>
     <hr class="mb-4">
       <h4 class="mb-3">Costos</h4>
               <ul class="list-group mb-3">
@@ -126,7 +132,7 @@
                 </li>
               </ul>
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg" type="submit">Comprar</button>
+              <button class="btn btn-primary btn-lg" type="submit" id="comprar">Comprar</button>
             </form>
           </div>
         </div>
@@ -148,6 +154,10 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="alert alert-primary-dismissible fade" id="alertResult" role="alert">
+    <span id="resultSpan"></span>
+  </div>
 
   <!--Modal dentro-->
   <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
@@ -199,6 +209,10 @@
       <div></div>
       <div></div>
     </div>
+  </div>
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alertaCompra">
+    <p>¡Has comprado con éxito!</p>
+    <button id="cerrarAlertaCompra" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>

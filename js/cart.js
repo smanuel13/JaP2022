@@ -3,6 +3,31 @@ let cartArray = [];
 let cartJSON = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 let subtotal1 = 0;
 let comission = 0.15;
+
+ //Variables del Modal y metodos de pago
+
+ let cardNumber = document.getElementById("cardNumber");
+ let cardExp = document.getElementById("cardExp");
+ let cardCode = document.getElementById("cardCode");
+ let cNumber = document.getElementById("cNumber");
+ let metodoDePago = document.getElementById("metodoDePago");
+
+   let metodo1 = document.getElementById("cCard");
+   console.log(metodo1)
+   let metodo2 = document.getElementById("bTransf")
+   console.log(metodo2)
+
+   //variables de validacion
+   let formadepago = document.getElementById("metodoDePago").innerText;
+   let premium = document.getElementById('premium');
+   let express = document.getElementById('express');
+   let standar = document.getElementById('standar');
+   let calle = document.getElementById('streetName');
+   let esquina = document.getElementById('streetCorner');
+   let numero = document.getElementById('streetNumber');
+   let faltaInfo = false;
+   let MSG = "Se realizó la compra con éxito se enviarán los detalles de facturación a su correo"
+
 //evento de escucha a la carga del dom que trae los datos al cargar la pagina y los pasa como parametros a la funcion
 
 document.addEventListener("DOMContentLoaded", function (a) {
@@ -28,8 +53,42 @@ document.addEventListener("DOMContentLoaded", function (a) {
       disPaymentforma();
     })
 
-       
+    let comprar = document.getElementById('form');
+    comprar.addEventListener("submit", function (e){
+      e.preventDefault(); 
+      e.preventDefault();
 
+        calle.classList.remove('is-invalid');
+        esquina.classList.remove('is-invalid');
+        numero.classList.remove('is-invalid');
+
+        if (calle.value === "")
+        {
+            calle.classList.add('is-invalid');
+            faltaInfo = true;
+        }
+        
+        if (esquina.value === "")
+        {
+            esquina.classList.add('is-invalid');
+            faltaInfo = true;
+        }
+
+        if (numero.value === "")
+        {
+            numero.classList.add('is-invalid');
+            faltaInfo = true;
+        }
+        
+        if (formadepago === "No ha seleccionado"){
+            faltaInfo = true;
+        
+        }  
+        
+        else{
+          validarForm()
+        }
+        
       });
 });
 
@@ -57,7 +116,7 @@ function showCartList(array){
             <td>${articulo.name}</td>
             <td>${articulo.currency}  <p id="costoUnidad">${articulo.unitCost}</p></td>
             <td><input type="number" id="cantidadArticulos" min="1" max="500" value="${articulo.count}"></td>
-            <td><p id="subtotal">${subtotal1}</p></td>
+            <td> USD<p id="subtotal"> ${subtotal1}</p></td>
           </tr> 
         </tbody>
       </table>
@@ -67,34 +126,18 @@ function showCartList(array){
         
         }
     }
-    //funcion para desactivar los campos del modal (NOMEFUNCIONAANOSEPORQUEPREGUNTARDANIEL)
-    // function disModal() {
+    
+    //Funcion para la alerta de compra
+    function showAlert() {
+      document.getElementById("alertaCompra").classList.add("show");
+  }
 
-      // let cCard = document.getElementById("cCard");
-      // let bTransf = document.getElementById("bTransf");
-      // let cNumber = document.getElementById("cardNumber"); 
-      // let cCode = document.getElementById("cardCode"); 
-      // let cExp = document.getElementById("cardExp"); 
-      // let accountNumber = document.getElementById("cNumber");
 
-  // if (cCard.checked) {
-      // cNumber.disabled = false
-      // cCode.disabled = false
-      // cExp.disabled = false
-      // accountNumber.disabled = true
-  // } else if (bTransf.checked) {
-      // cNumber.disabled = true
-      // cCode.disabled = true
-      // cExp.disabled = true
-      // accountNumber.disabled = false
-  // }
-
-  // document.getElementById("contidionsModal").addEventListener("click", function(e){
-    // disModal();
-
-  // }
-  // )}
-
+  function validarForm() {
+    if(document.getElementById("form").checkValidity) {
+        showAlert();
+    }
+}
     //funcion para actualizar el subtotal, obteniene los elementos y hace la cuenta
     function updateSubtotal(){
       let cantArt = document.getElementById("cantidadArticulos").value;
@@ -137,18 +180,7 @@ function showCartList(array){
 
 
 
-    //Variables del Modal y metodos de pago
-
-      let cardNumber = document.getElementById("cardNumber");
-      let cardExp = document.getElementById("cardExp");
-      let cardCode = document.getElementById("cardCode");
-      let cNumber = document.getElementById("cNumber");
-      let metodoDePago = document.getElementById("metodoDePago");
-
-        let metodo1 = document.getElementById("cCard");
-        console.log(metodo1)
-        let metodo2 = document.getElementById("bTransf")
-        console.log(metodo2)
+   
 
 
 //Función para deshabilitar los campos del modal y mostrar el metodo de pago seleccionado
@@ -175,4 +207,40 @@ function showCartList(array){
              disPaymentforma();
         
            })}
+
+           //Validaciones
+
+           /*function validaciones () {
            
+        
+            if (premium.checked || express.checked || standar.checked ) {
+                premium.classList.remove('is-invalid');
+                premium.classList.remove('link-danger');
+            } else {
+                premium.classList.add('is-invalid');
+                premium.classList.add('link-danger');
+            };
+        
+            if (calle === "") {
+                calle.classList.add('is-invalid');
+            }else {
+                calle.classList.remove('is-invalid');
+            }
+        
+            if(esquina === "") {
+                esquina.classList.add('is-invalid');
+            }else{
+                esquina.classList.remove('is-invalid');
+            }
+        
+            if(numero === "") {
+                numero.classList.add('is-invalid');
+            }else{
+                numero.classList.remove('is-invalid');
+            }
+         
+        }
+*/
+
+      
+      })

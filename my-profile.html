@@ -50,11 +50,49 @@
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+  <main id="msg">
+    <div class="container" id="userProfile">
+      <h4 class="m-4">Perfil</h4>
+
+      <form id="perfil" action="" class="row px-5" novalidate>
+        <div class="col-sm-8">
+          <div class="row mb-3 justify-content-between">
+            <div class="col-6">
+              <label class="form-label" for="name">Nombre</label>
+              <input class="form-control" type="text" name="name" id="name" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="name_second">Segundo Nombre</label>
+              <input class="form-control" type="text" name="name_second" id="name_second">
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-between">
+            <div class="col-6">
+              <label class="form-label" for="lastname">Apellido</label>
+              <input class="form-control" type="text" name="lastname" id="lastname" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="lastname_second">Segundo Apellido</label>
+              <input class="form-control" type="text" name="lastname_second" id="lastname_second">
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-between">
+            <div class="col">
+              <label class="form-label" for="email">E-mail</label>
+              <input type="email" class="form-control" type="text" name="email" id="email" required>
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-between">
+            <div class="col">
+              <label class="form-label" for="cel">Celular</label>
+              <input class="form-control" type="text" name="cel" id="cel">
+            </div>
+          </div>
+        </div>
+        <hr class="my-3">
+        <button type="submit" class="btn btn-primary w-50 mx-auto" id="guardar">Guardar</button>
+      </form>
+    
     </div>
   </main>
   <footer class="text-muted">

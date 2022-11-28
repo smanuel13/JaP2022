@@ -39,6 +39,11 @@ let getJSONData = function(url){
         return result;
     });
 }
+//funcion para traer el nombre del usuario
+function username(){
+  return localStorage.getItem("mail1");
+}
+
 
 /*Creo un event de escucha para que primero cargue el dom, luego ejecuto mi funcion que lo que hace es:
 Defino una variable loginName para traer el elemento mail1 guardado en el local storage (ver login.js linea 27) luego defino una
@@ -64,7 +69,10 @@ document.addEventListener("DOMContentLoaded", function(){
     let cerrarSesion = confirm("Está a punto de cerrar su sesión");
     if (cerrarSesion){
       window.location.href = "index.html"
-      localStorage.removeItem("mail1")
+      localStorage.removeItem("mail1");
+      localStorage.removeItem("catID");
+      localStorage.removeItem("productoID");
+      localStorage.removeItem("datosUsuario");
     }
   });
 
